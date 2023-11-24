@@ -20,16 +20,16 @@ const BookAnAppointment = () => {
 
   return (
     <>
-      <div className="card mt-5">
+      <div className="card">
         <div className="card-body">
           <div className="card-title">
-            <h2>Choose location and date to book your appointment.</h2>
+            <h2>Book your appointment.</h2>
           </div>
           <div className="card-text text-start">
             <form>
               <div className="m-4">
                 <label htmlFor="where" className="form-label">
-                  Which of our shops would you like to visit
+                  Please select where you would you like to visit
                 </label>
 
                 <select
@@ -50,7 +50,7 @@ const BookAnAppointment = () => {
                 <> */}
                   <div className="m-4">
                     <label htmlFor="visit-date-time" className="form-label">
-                      Please select you ideal time for your visit
+                      Please select you ideal time for your visit 
                     </label>
                     <br />
                     <DateTimePicker
@@ -73,7 +73,7 @@ const BookAnAppointment = () => {
                   </div>
                   <div className="m-4">
                     <label htmlFor="email" className="form-label">
-                      Email address
+                      Your Email Address
                     </label>
                     <input
                       type="email"
@@ -84,7 +84,7 @@ const BookAnAppointment = () => {
                   </div>
                   <div className="m-4">
                     <label htmlFor="tel" className="form-label">
-                      Telephone
+                      Your Telephone Number
                     </label>
                     <input
                       type="tel"
@@ -95,7 +95,7 @@ const BookAnAppointment = () => {
                   </div>
                   <div className="m-4">
                     <label htmlFor="message" className="form-label">
-                      Message
+                      Your Message
                     </label>
                     <textarea
                       className="form-control"

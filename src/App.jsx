@@ -31,7 +31,7 @@ function Layout() {
     <div>
        <Header />
         <Nav />
-        <div className="container">
+        <div className="container pt-5 text-start ">
  <Outlet />
         </div>
        
