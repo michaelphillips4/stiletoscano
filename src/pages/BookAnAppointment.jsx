@@ -1,10 +1,18 @@
+import { useIntl, FormattedMessage } from "react-intl";
+
 import DateTimePicker from "react-datetime-picker";
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 import { useState } from "react";
 
-const defaultOption = "Please select a shop";
+
+const BookAnAppointment = () => { 
+  const getFormatMessage = (messageId) =>  useIntl().formatMessage({ id: messageId });
+  const defaultOption =getFormatMessage("bookAnAppointment_selectItem") ;
+  const [value, onChange] = useState(new Date());
+  const [selectedOption, setSelectedOption] = useState(defaultOption);
+
 
 const options = [
   defaultOption,
@@ -14,22 +22,20 @@ const options = [
   "Sartoria Rossi - Factory Store - Outlet Marciano Della Chiana",
 ];
 
-const BookAnAppointment = () => {
-  const [value, onChange] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState(defaultOption);
+
 
   return (
     <>
       <div className="card">
         <div className="card-body">
           <div className="card-title">
-            <h2>Book your appointment.</h2>
+            <h2><FormattedMessage id="bookAnAppointment_Title" /></h2>
           </div>
           <div className="card-text text-start">
             <form>
               <div className="m-4">
                 <label htmlFor="where" className="form-label">
-                  Please select where you would you like to visit
+                <FormattedMessage id="bookAnAppointment_selectShopLabel" />
                 </label>
 
                 <select
@@ -50,7 +56,7 @@ const BookAnAppointment = () => {
                 <> */}
                   <div className="m-4">
                     <label htmlFor="visit-date-time" className="form-label">
-                      Please select you ideal time for your visit 
+                    <FormattedMessage id="bookAnAppointment_dateLabel" />
                     </label>
                     <br />
                     <DateTimePicker
@@ -62,18 +68,18 @@ const BookAnAppointment = () => {
 
                   <div className="m-4">
                     <label htmlFor="name" className="form-label">
-                      Your Name
+                    <FormattedMessage id="bookAnAppointment_nameLabel" />
                     </label>
                     <input
                       type="name"
                       className="form-control"
                       id="name"
-                      placeholder="Mr A Smith"
+                      placeholder={getFormatMessage("bookAnAppointment_namePlaceHolder")} 
                     />
                   </div>
                   <div className="m-4">
                     <label htmlFor="email" className="form-label">
-                      Your Email Address
+                    <FormattedMessage id="bookAnAppointment_emailLabel" />
                     </label>
                     <input
                       type="email"
@@ -84,7 +90,7 @@ const BookAnAppointment = () => {
                   </div>
                   <div className="m-4">
                     <label htmlFor="tel" className="form-label">
-                      Your Telephone Number
+                    <FormattedMessage id="bookAnAppointment_telLabel" />
                     </label>
                     <input
                       type="tel"
@@ -95,7 +101,7 @@ const BookAnAppointment = () => {
                   </div>
                   <div className="m-4">
                     <label htmlFor="message" className="form-label">
-                      Your Message
+                    <FormattedMessage id="bookAnAppointment_messageLabel" />
                     </label>
                     <textarea
                       className="form-control"
@@ -104,7 +110,7 @@ const BookAnAppointment = () => {
                     ></textarea>
                   
                       <button type="submit" className="btn btn-dark mt-2">
-                        Book
+                      <FormattedMessage id="bookAnAppointment_submitLabel" />
                       </button>
                    
                   </div>
