@@ -9,18 +9,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1{
+.header{ 
+ 
+    color-scheme: light dark;
+    background-color: #242424;
+  
+  }
+
+h1{ 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-  font-size: 3.2em;
-  line-height: 1.1;
-  
-  margin: 0;
-  padding: 20px;;
-}
-body {
   text-align: center;
+} 
+
+body {
+/*   text-align: center; */
   margin: 0;
   padding: 0;  
 }

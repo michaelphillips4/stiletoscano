@@ -1,10 +1,17 @@
 # Stile Toscano
 Tuscan style, tailor-made clothes
 
+original https://stileoscano.eu 
+
+
 ## Tech stack 
 
 Site uses vite - react. The style is css and bootstrap for the input forms.
 it is currently hosted on ASW using amplify.
+
+## internationalization 
+
+see : https://blog.logrocket.com/react-intl-internationalize-your-react-apps/
 
 ## Questions 
 

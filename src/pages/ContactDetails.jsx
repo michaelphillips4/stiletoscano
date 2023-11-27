@@ -1,6 +1,8 @@
+import { FormattedMessage } from "react-intl";
+
 const ContactDetails = () => {
 
-    return <h2>contatti</h2>
+    return <h2><FormattedMessage id="contact_Title" /></h2>
 }
 
 export default ContactDetails;

@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
-export default Index => {
+const Header = () => {
+ 
+  return ( <div className="header">
+ 
+         <h1 className="m-0 display-1">
+          <FormattedMessage id="companyName" />
+       </h1>
 
-    return <><Link to="/" ><h1>Stile Toscano </h1></Link></>
-    
-    }
+ </div>
+  );
+};
+
+export default Header;
