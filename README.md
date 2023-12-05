@@ -1,7 +1,7 @@
 # Stile Toscano
 Tuscan style, tailor-made clothes
 
-original https://stileoscano.eu 
+original https://stiletoscano.eu/ 
 
 
 ## Tech stack 
