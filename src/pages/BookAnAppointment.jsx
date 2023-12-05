@@ -1,122 +1,38 @@
 import { useIntl, FormattedMessage } from "react-intl";
 import { useReducer } from "react";
 import ListWithLabel from "../components/ListWithLabel";
-import getMonthsOptions from "../MonthsMachine";
-import getDaysForMonthOptions from "../DaysForMonthMachine";
-let defaultOption = "";
+import TextWithLabel from "../components/TextWithlabel";
+import { getMonthsOptions, getDaysForMonthOptions } from "../BookingDates";
+import { getShops, getTime } from "../Helpers";
+import { initialBooking, reducer } from "../pages/BookingFormReducer";
 const next12Months = getMonthsOptions(new Date());
 
-const initialBooking = {
-  year: null,
-  month: null,
-  day: "",
-  time: "",
-  shop: "",
-  monthKey: "",
-};
-
-const reducer = (state, action) => {
-  console.log(state, action);
-  switch (action.type) {
-    case "CHANGE-SHOP":
-      return {
-        ...initialBooking,
-        shop: action.shop === defaultOption ? "" : action.shop,
-      };
-    case "CHANGE-MONTH":
-      if (next12Months.has(action.monthKey)) {
-        const monthDatePart = next12Months.get(action.monthKey);
-        return {
-          ...initialBooking,
-          shop: state.shop,
-          year: monthDatePart.year,
-          month: monthDatePart.month,
-          monthKey: action.monthKey,
-        };
-      }
-      return {
-        ...initialBooking,
-        shop: state.shop,
-      };
-    case "CHANGE-DAY":
-      return { ...state, day: action.day === defaultOption ? "" : action.day };
-    case "CHANGE-TIME":
-      return { ...state, time: action.time=== defaultOption ? "" : action.time};
-    default:
-      return state;
-  }
-};
-
 const BookAnAppointment = () => {
+
   const [booking, dispatch] = useReducer(reducer, initialBooking);
-  const getFormatMessage = (messageId) =>
-    useIntl().formatMessage({ id: messageId });
-  defaultOption = getFormatMessage("bookAnAppointment_selectItem");
-
-  const optionsShops = [
-    defaultOption,
-    "GENOA - Mazzini Gallery, 42/R",
-    "MILAN - Sala Dei Longobardi, 2 (Emporio Falcai)",
-    "ROME - Via Veneto 104",
-    "Sartoria Rossi - Factory Store - Outlet Marciano Della Chiana",
-  ];
-
-  const timeSlots = [
-    defaultOption,
-    "10:15",
-    "10:30",
-    "10:45",
-    "11:00",
-    "11:15",
-    "11:30",
-    "11:45",
-    "12:00",
-    "12:15",
-    "12:30",
-    "12:45",
-    "13:00",
-    "13:15",
-    "13:30",
-    "13:45",
-    "14:00",
-    "14:15",
-    "14:30",
-    "14:45",
-    "15:00",
-    "15:15",
-    "15:30",
-    "15:45",
-    "16:00",
-    "16:15",
-    "16:30",
-    "16:45",
-    "17:00",
-    "17:15",
-    "17:30",
-    "17:45",
-    "18:00",
-    "18:15",
-    "18:30",
-    "18:45",
-    "19:00",
-  ];
-
-
-  const namePlaceHolder = getFormatMessage("bookAnAppointment_namePlaceHolder") 
+  const getFormatMessage = (messageId) => useIntl().formatMessage({ id: messageId });
+  const defaultOption = getFormatMessage("bookAnAppointment_selectItem");
+  const optionsShops = getShops(defaultOption);
+  const timeSlots = getTime(defaultOption);
+  const namePlaceHolder = getFormatMessage("bookAnAppointment_namePlaceHolder");
+  const emailPlaceHolder = getFormatMessage( "bookAnAppointment_emailPlaceHolder");
+  const telPlaceHolder = getFormatMessage("bookAnAppointment_telPlaceHolder");
+  const clearDefaultOption =(v) => v === defaultOption ? "" : v;
 
   return (
     <>
       <h2>
         <FormattedMessage id="bookAnAppointment_Title" />
       </h2>
-     {/*  {JSON.stringify(booking)}
+    {/*   {JSON.stringify(booking)}
       <hr /> */}
-      
       <ListWithLabel
         selectId="where"
         labelMessageId="bookAnAppointment_selectShopLabel"
         options={optionsShops}
-        onChangeHandler={(e) => dispatch({ type: "CHANGE-SHOP", shop: e })}
+        onChangeHandler={(e) =>
+          dispatch({ type: "CHANGE-SHOP", shop: clearDefaultOption(e) })
+        }
         value={booking.shop}
       />
 
@@ -125,9 +41,22 @@ const BookAnAppointment = () => {
           selectId="month"
           options={[defaultOption, ...next12Months.keys()]}
           labelMessageId="bookAnAppointment_monthLabel"
-          onChangeHandler={(e) =>
-            dispatch({ type: "CHANGE-MONTH", monthKey: e })
-          }
+          onChangeHandler={(v) => {
+            if (next12Months.has(v)) {
+              const p = next12Months.get(v);
+              dispatch({
+                type: "CHANGE-MONTH",
+                monthKey: clearDefaultOption(v),
+                year: p.year,
+                month: p.month,
+              });
+            } else {
+              dispatch({
+                type: "CHANGE-MONTH",
+                monthKey: clearDefaultOption(v),
+              });
+            }
+          }}
           value={booking.monthKey}
         />
       )}
@@ -140,7 +69,9 @@ const BookAnAppointment = () => {
             ...getDaysForMonthOptions(booking.month, booking.year).keys(),
           ]}
           labelMessageId="bookAnAppointment_dayLabel"
-          onChangeHandler={(e) => dispatch({ type: "CHANGE-DAY", day: e })}
+          onChangeHandler={(e) =>
+            dispatch({ type: "CHANGE-DAY", day: clearDefaultOption(e) })
+          }
           value={booking.day}
         />
       )}
@@ -150,55 +81,51 @@ const BookAnAppointment = () => {
           selectId="time"
           options={timeSlots}
           labelMessageId="bookAnAppointment_timeLabel"
-          onChangeHandler={(e) => dispatch({ type: "CHANGE-TIME", time: e })}
+          onChangeHandler={(e) =>
+            dispatch({ type: "CHANGE-TIME", time: clearDefaultOption(e) })
+          }
           value={booking.time}
         />
       )}
 
-      {booking.time &&  <>
-          <label htmlFor="name" className="form-label">
-            <FormattedMessage id="bookAnAppointment_nameLabel" />
-          </label>
-          <input
-            type="name"
-            className="form-control my-2"
+      {booking.time && (
+        <>
+          <TextWithLabel
             id="name"
-            placeholder={namePlaceHolder}
+            labelMessageId="bookAnAppointment_nameLabel"
+            placeHolder={namePlaceHolder}
+            onChangeHandler={(e) => dispatch({ type: "CHANGE-NAME", name: e })}
+            value={booking.name}
           />
 
-          <label htmlFor="email" className="form-label ">
-            <FormattedMessage id="bookAnAppointment_emailLabel" />
-          </label>
-          <input
-            type="email"
-            className="form-control my-2"
+          <TextWithLabel
             id="email"
-            placeholder="name@example.com"
+            labelMessageId="bookAnAppointment_emailLabel"
+            placeHolder={emailPlaceHolder}
+            onChangeHandler={(e) =>
+              dispatch({ type: "CHANGE-EMAIL", email: e })
+            }
+            value={booking.email}
           />
 
-          <label htmlFor="tel" className="form-label ">
-            <FormattedMessage id="bookAnAppointment_telLabel" />
-          </label>
-
-          <input
-            type="tel"
-            className="form-control my-2 "
+          <TextWithLabel
             id="tel"
-            placeholder="077123456789"
+            labelMessageId="bookAnAppointment_telLabel"
+            placeHolder={telPlaceHolder}
+            onChangeHandler={(e) => dispatch({ type: "CHANGE-TEL", tel: e })}
+            value={booking.tel}
           />
 
           <label htmlFor="message" className="form-label ">
             <FormattedMessage id="bookAnAppointment_messageLabel" />
           </label>
-
           <textarea className="form-control" id="message" rows="3"></textarea>
 
           <button type="submit" className="btn btn-dark mt-2">
             <FormattedMessage id="bookAnAppointment_submitLabel" />
           </button>
         </>
-     } 
-
+      )}
     </>
   );
 };
