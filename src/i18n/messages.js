@@ -23,8 +23,9 @@ export const messages = {
     bookAnAppointment_messageLabel:"Your Message",
     bookAnAppointment_submitLabel:"Book",
     contact_Title:"Contact",
-    VATnumber:"VAT number 03497090989"
-  },
+    VATnumber:"VAT number 03497090989",
+    weekDayNames:"Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday",
+    monthNames:"January,February,March,April,May,June,July,August,September,October,November,December"},
   [LOCALES.ITALIAN]: {
     companyName: "Stile Toscano",
     whoAreWe_Title:"Chi Siamo",
@@ -47,6 +48,8 @@ export const messages = {
     bookAnAppointment_messageLabel:"Commento",
     bookAnAppointment_submitLabel:"Prenota",
     contact_Title:"Contatti",
-    VATnumber:"P.IVA 03497090989 "
+    VATnumber:"P.IVA 03497090989",
+    weekDayNames:"Lunedì,Martedì,Mercoledì,Giovedì,Venerdì,Sabato,Domenica",
+    monthNames:"Gennaio,Febbraio,Marzo,Aprile,Maggio,Giugno,Luglio,Agosto,Settembre,Ottobre,Novembre,Dicembre"
   },
 };

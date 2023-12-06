@@ -23,6 +23,8 @@ const ListWithLabel = ({
           <FormattedMessage id={labelMessageId} />
         </label>
       )}
+       <div className="row">
+      <div className="col-11">
  <select
         id={selectId}
         className="form-select"
@@ -36,6 +38,13 @@ const ListWithLabel = ({
             </option>
           ))}
       </select>
+      </div>
+         <div className="col mt-4">
+          {value && 
+          <i className="bi bi-check2"></i>}
+          {!value && <span>*</span>}
+          </div>
+     </div>
     </>
   );
 };

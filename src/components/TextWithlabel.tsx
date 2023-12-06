@@ -13,9 +13,8 @@ const TextWithLabel = ({
   labelMessageId,
   placeHolder,
   value,
-  onChangeHandler,
+  onChangeHandler  
 }: Props) => {
-
   return (
     <>
       {labelMessageId && (
@@ -23,15 +22,25 @@ const TextWithLabel = ({
           <FormattedMessage id={labelMessageId} />
         </label>
       )}
-      <input
-        type="text"
-        className="form-control my-2"
-        id={Id}
-        placeholder={placeHolder}
-        onChange={(e) => onChangeHandler(e.target.value)}
-        value={value}
-      />
-    </>
+     <div className="row">
+      <div className="col-11">
+          <input
+            type="text"
+            className="form-control "
+            id={Id}
+            placeholder={placeHolder}
+            onChange={(e) => onChangeHandler(e.target.value)}
+            value={value}
+           
+          />
+         </div>
+         <div className="col mt-4">
+          {value && 
+          <i className="bi bi-check2"></i>}
+          {!value && <span>*</span>}
+          </div>
+     </div>
+     </>
   );
 };
 
