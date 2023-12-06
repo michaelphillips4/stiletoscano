@@ -23,7 +23,7 @@ const TextWithLabel = ({
         </label>
       )}
      <div className="row">
-      <div className="col-11">
+      <div className="col-10">
           <input
             type="text"
             className="form-control "

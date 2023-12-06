@@ -4,20 +4,20 @@ const getDaysForMonthOptions = (
   year: number,
   weekDayNames: string[]
 ): Map<string, number> => {
-  const monthIndex = month - 1;
-  const date = new Date(year, monthIndex, 1);
+
+  const date = new Date(year, month, 1);
   const map = new Map<string, number>();
 
-  while (date.getMonth() === monthIndex) {
+  while (date.getMonth() === month) {
     map.set(
       `${date.getDate().toString().padStart(2, "0")} - ${
         weekDayNames[date.getDay()]
       }`,
-      date.getDay()
+      date.getDate()
     );
     date.setDate(date.getDate() + 1);
   }
-
+/* console.log("getDaysForMonthOptions",month,year,weekDayNames.join(),map.values()); */
   return map;
 };
 

@@ -5,10 +5,12 @@ const Nav = () => {
     <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body pt-0 text-center " data-bs-theme="dark">
       <div className="container-fluid">
      
-  <a className="navbar-brand display-1" href="#">
-            
+  <a className="navbar-brand " href="#">
+  <div className="col-8 m-0 display-1 h1 ps-4 m-1">
+          <FormattedMessage id="companyName" />
+          </div>
         </a> 
-       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
+       <button className="navbar-toggler pe-2" type="button" data-bs-toggle="collapse" 
        data-bs-target="#navbarNavDropdown" 
        aria-controls="navbarNavDropdown" 
        aria-expanded="false"

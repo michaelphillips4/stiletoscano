@@ -7,6 +7,7 @@ const languages = [
 
 const Footer = ({ currentLocale, handleChange }) => {
   return (
+    
     <footer>
       <select
         onChange={handleChange}
