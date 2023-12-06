@@ -23,7 +23,7 @@ const initialBooking: Booking = {
 };
 
 function reducer(state: Booking, action: any) {
-  console.log(state, action);
+  
   switch (action.type) {
     case "CHANGE-SHOP":
       return {

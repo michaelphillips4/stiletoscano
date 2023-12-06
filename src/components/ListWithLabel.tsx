@@ -24,7 +24,7 @@ const ListWithLabel = ({
         </label>
       )}
        <div className="row">
-      <div className="col-11">
+      <div className="col-10">
  <select
         id={selectId}
         className="form-select"

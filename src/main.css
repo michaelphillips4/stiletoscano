@@ -16,7 +16,7 @@
   
   }
 
-h1{ 
+.h1{ 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   text-align: center;
@@ -35,10 +35,10 @@ a {
 
 footer {
   padding: 10px;
-  position: fixed;
+ position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100%; 
   text-align: center;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;

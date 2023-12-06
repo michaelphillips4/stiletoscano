@@ -3,7 +3,6 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import { LOCALES } from "./i18n/locales";
 import { messages } from "./i18n/messages";
-import Header from "./components/Header";
 import Nav from "./components/Nav";
 import ContactDetails from "./pages/ContactDetails";
 import Index from "./pages/Index";
@@ -12,7 +11,6 @@ import WhoAreWe from "./pages/WhoAreWe";
 import BookAnAppointment from "./pages/BookAnAppointment";
 import Footer from "./components/Footer";
 
-//localstorage
 function getInitialLocal() {
   // getting stored items
   const savedLocale = localStorage.getItem("locale1");
@@ -35,7 +33,7 @@ export default function App() {
      defaultLocale={LOCALES.ENGLISH}>
       <Routes>
         <Route path="/" element={<Layout currentLocale={currentLocale} handleChange={handleChange} />}>
-          <Route index element={<Index />} />
+          <Route index element={<WhoAreWe />} />
           <Route path="chi-siamo" element={<WhoAreWe />} />
           <Route path="servizi-a-domicilio" element={<HomeServices />} />
           <Route
@@ -55,13 +53,16 @@ function Layout({currentLocale,handleChange} ) {
   return (
     <div>
       <div className="header">
-      <Header />
-      <Nav />
+        <Nav /> 
       </div>
-      <div className="container pt-5 text-start ">
+      <div className="container pt-5 text-start">
         <Outlet />
+ 
       </div>
-
+       <br />
+       <br />
+       <br />
+       <br />
       <Footer currentLocale={currentLocale} handleChange={handleChange}  />
     </div>
   );

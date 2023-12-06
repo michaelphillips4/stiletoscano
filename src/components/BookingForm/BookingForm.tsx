@@ -47,19 +47,34 @@ const BookingForm = ({
     booking.email &&
     booking.name;
 
+let bookingDate = new Date(booking.year,booking.month,parseInt(booking.day));
 
-    let d = new Date(booking.year,booking.month,parseInt(booking.day));
+
+    const monthChangeHandler =(v: string)=>
+    {
+        let m = null,y = null;
+        if (next12Months.has(v)) {
+           const p = next12Months.get(v);
+           m= p.month; y= p.year;
+        } 
+        dispatch({type: "CHANGE-MONTH",monthKey: clearDefaultOption(v), year: y, month: m});
+      
+    }
+
 
 
   return (
     <>
+
+{/* {JSON.stringify(booking)} */}
+
        {bookingComplete && (<>
         <h3>
          Thank you {booking.name} your Appointment is booked.   <i className="bi bi-check2"></i></h3>
          <br />
          <b>Time:</b> {booking.time} 
          <br />
-         <b>Day:</b> <FormattedDate value={d}  
+         <b>Day:</b> <FormattedDate value={bookingDate}  
          year="numeric"
          month="long"
          day="2-digit" />
@@ -76,8 +91,8 @@ const BookingForm = ({
             selectId="where"
             labelMessageId="bookAnAppointment_selectShopLabel"
             options={shops}
-            onChangeHandler={(e) =>
-              dispatch({ type: "CHANGE-SHOP", shop: clearDefaultOption(e) })
+            onChangeHandler={(v : string) =>
+              dispatch({ type: "CHANGE-SHOP", shop: clearDefaultOption(v) })
             }
             value={booking.shop}
           />
@@ -87,27 +102,12 @@ const BookingForm = ({
               selectId="month"
               options={[defaultOption, ...next12Months.keys()]}
               labelMessageId="bookAnAppointment_monthLabel"
-              onChangeHandler={(v: string) => {
-                if (next12Months.has(v)) {
-                  const p = next12Months.get(v);
-                  dispatch({
-                    type: "CHANGE-MONTH",
-                    monthKey: clearDefaultOption(v),
-                    year: p.year,
-                    month: p.month,
-                  });
-                } else {
-                  dispatch({
-                    type: "CHANGE-MONTH",
-                    monthKey: clearDefaultOption(v),
-                  });
-                }
-              }}
+              onChangeHandler={(v :string) => monthChangeHandler(v)}
               value={booking.monthKey}
             />
           )}
 
-          {booking.month && (
+          {(booking.month !== null || booking.month) && (
             <ListWithLabel
               selectId="days"
               options={[
@@ -144,8 +144,8 @@ const BookingForm = ({
                 Id="name"
                 labelMessageId="bookAnAppointment_nameLabel"
                 placeHolder={namePlaceHolder}
-                onChangeHandler={(e) =>
-                  dispatch({ type: "CHANGE-NAME", name: e })
+                onChangeHandler={(v: string) =>
+                  dispatch({ type: "CHANGE-NAME", name: v })
                 }
                 value={booking.name}
               />
@@ -154,8 +154,8 @@ const BookingForm = ({
                 Id="email"
                 labelMessageId="bookAnAppointment_emailLabel"
                 placeHolder={emailPlaceHolder}
-                onChangeHandler={(e) =>
-                  dispatch({ type: "CHANGE-EMAIL", email: e })
+                onChangeHandler={(v: string) =>
+                  dispatch({ type: "CHANGE-EMAIL", email: v })
                 }
                 value={booking.email}
               />
@@ -164,8 +164,8 @@ const BookingForm = ({
                 Id="tel"
                 labelMessageId="bookAnAppointment_telLabel"
                 placeHolder={telPlaceHolder}
-                onChangeHandler={(e) =>
-                  dispatch({ type: "CHANGE-TEL", tel: e })
+                onChangeHandler={(v :string) =>
+                  dispatch({ type: "CHANGE-TEL", tel: v })
                 }
                 value={booking.tel}
               />
