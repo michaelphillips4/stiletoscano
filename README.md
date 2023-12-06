@@ -3,15 +3,32 @@ Tuscan style, tailor-made clothes
 
 original https://stiletoscano.eu/ 
 
+### Booking form
+Booking form works: allowing the user to select a month then day then time for their booking.
+Once these are filled in it asks the user for their contact details.
+<br /><br />
+The book/submit button is only enabled when all the details are filled in the nots section is optional.
+<br /><br />
+There is validation that is shown by the ticks.
+<br /><br />
+There is no validation for the format of the email or tel at present.
+<br /><br />
+It has options in it to query a diary when we know more about this is currently set up.    
+
+### Internationalization 
+
+currently you can select italian or english from the drp down and the text date formats and number formats will be changed as expected.
+The text values are all in one file src/i18n/messages.js this file can be easily edited. 
+see : https://github.com/michaelphillips4/stiletoscano/blob/main/src/i18n/messages.js
+
 
 ## Tech stack 
 
 Site uses vite - react. The style is css and bootstrap for the input forms.
 it is currently hosted on ASW using amplify.
 
-## internationalization 
+react-intl see : https://blog.logrocket.com/react-intl-internationalize-your-react-apps/
 
-see : https://blog.logrocket.com/react-intl-internationalize-your-react-apps/
 
 ## Questions 
 
@@ -24,9 +41,6 @@ see : https://blog.logrocket.com/react-intl-internationalize-your-react-apps/
 * what language should it be in.  
 * hosting and mapping to the existing url.
 * SEO stuff.   
-
-
-
 
 
 # React + Vite

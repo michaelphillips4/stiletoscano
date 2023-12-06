@@ -58,6 +58,11 @@ input[type=text], select {
   padding: 5px;
 }
 
+.flex-container {
+  display: flex;
+  background-color: DodgerBlue;
+}
+
 /* h1 {
  
 }
